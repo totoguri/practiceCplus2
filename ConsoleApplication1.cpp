@@ -283,63 +283,225 @@ using namespace std;
 //}
 
 
-class FruitSeller
-{
+//class FruitSeller
+//{
+//private:
+//	int APPLE_PRICE;
+//	int numOfApples;
+//	int myMoney;
+//
+//public:
+//	void InitMembers(int price, int num, int money) {
+//		APPLE_PRICE = price;
+//		numOfApples = num;
+//		myMoney = money;
+//	}
+//	int SaleApples(int money) {
+//		int num = money / APPLE_PRICE;
+//		numOfApples -= num;
+//		myMoney += money;
+//		return num;
+//	}
+//	void ShowSalesResult() {
+//		cout << "Left Apples: " << numOfApples << endl;
+//		cout << "Earned Money: " << myMoney << endl << endl;
+//	}
+//};
+//
+//class FruitBuyer {
+//private:
+//	int myMoney;
+//	int numOfApples;
+//
+//public:
+//	void InitMembers(int money) {
+//		myMoney = money;
+//		numOfApples = 0;
+//	}
+//	void BuyApples(FruitSeller& seller, int money) {
+//		numOfApples += seller.SaleApples(money);
+//		myMoney -= money;
+//	}
+//	void ShowBuyResult() {
+//		cout << "Left Money: " << myMoney << endl;
+//		cout << "Apples: " << numOfApples << endl << endl;
+//	}
+//};
+//
+//int main() {
+//	FruitSeller seller;
+//	seller.InitMembers(1000, 20, 0);
+//	FruitBuyer buyer;
+//	buyer.InitMembers(5000);
+//	buyer.BuyApples(seller, 2000);
+//
+//	cout << "Status of Seller" << endl;
+//	seller.ShowSalesResult();
+//	cout << "Status of Buyer" << endl;
+//	buyer.ShowBuyResult();
+//	return 0;
+//}
+
+// p.144
+
+
+//class Point {
+//private:
+//	int x;
+//	int y;
+//
+//public:
+//	bool InitMembers(int xpos, int ypos);
+//	int GetX() const;
+//	int GetY() const;
+//	bool SetX(int xpos);
+//	bool SetY(int ypos);
+//};
+//
+//bool Point::InitMembers(int xpos, int ypos) {
+//	if (xpos < 0 || ypos < 0) {
+//		cout << "벗어난 범위의 값 전달" << endl;
+//		return false;
+//	}
+//
+//	x = xpos;
+//	y = ypos;
+//	return true;
+//}
+//int Point::GetX() const {
+//	return x;
+//}
+//int Point::GetY() const {
+//	return y;
+//}
+//bool Point::SetX(int xpos) {
+//	if (0 > xpos || xpos > 100) {
+//		cout << "벗어난 범위의 값 전달" << endl;
+//		return false;
+//	}
+//	x = xpos;
+//	return true;
+//}
+//bool Point::SetY(int ypos) {
+//	if (0 > ypos || ypos > 100) {
+//		cout << "벗어난 범위의 값 전달" << endl;
+//		return false;
+//	}
+//	ypos;
+//	return true;
+//}
+//
+//class Rectangle {
+//private:
+//	Point upLeft;
+//	Point lowRight;
+//
+//public:
+//	bool InitMembers(const Point& ul, const Point& lr);
+//	void ShowRecInfo() const;
+//};
+//
+//bool Rectangle::InitMembers(const Point& ul, const Point& lr) {
+//	if (ul.GetX() > lr.GetX() || ul.GetY() > lr.GetY()) {
+//		cout << "잘못된 위치정보 전달" << endl;
+//		return false;
+//	}
+//	upLeft = ul;
+//	lowRight = lr;
+//	return true;
+//}
+//void Rectangle::ShowRecInfo() const {
+//	cout << "좌 상단: " << '[' << upLeft.GetX() << ", ";
+//	cout << upLeft.GetY() << ']' << endl;
+//	cout << "우 하단: " << '[' << lowRight.GetX() << ", ";
+//	cout << lowRight.GetY() << ']' << endl << endl;
+//}
+//
+//int main() {
+//	Point pos1;
+//	if (!pos1.InitMembers(-2, 4))
+//		cout << "초기화 실패" << endl;
+//	if (!pos1.InitMembers(2, 4))
+//		cout << "초기화 실패" << endl;
+//
+//	Point pos2;
+//	if (!pos2.InitMembers(5, 9))
+//		cout << "초기화 실패" << endl;
+//
+//	Rectangle rec;
+//	if (!rec.InitMembers(pos2, pos1))
+//		cout << "직사각형 초기화 실패" << endl;
+//
+//	if (!rec.InitMembers(pos1, pos2))
+//		cout << "직사각형 초기화 실패" << endl;
+//
+//	rec.ShowRecInfo();
+//	return 0;
+//}
+
+
+//class SimpleClass {
+//private:
+//	int num1;
+//	int num2;
+//
+//public:
+//	SimpleClass() {
+//		num1 = 0;
+//		num2 = 0;
+//	}
+//	SimpleClass(int n) {
+//		num1 = n;
+//		num2 = 0;
+//	}
+//	SimpleClass(int n1, int n2) {
+//		num1 = n1;
+//		num2 = n2;
+//	}
+//
+//	void ShowData() const {
+//		cout << num1 << ' ' << num2 << endl;
+//	}
+//};
+//
+//int main() {
+//	SimpleClass sc1;
+//	sc1.ShowData();
+//
+//	SimpleClass sc2(100);
+//	sc2.ShowData();
+//
+//	SimpleClass sc3(100, 200);
+//	sc3.ShowData();
+//	return 0;
+//}
+
+
+class SimpleClass {
 private:
-	int APPLE_PRICE;
-	int numOfApples;
-	int myMoney;
+	int num1;
+	int num2;
 
 public:
-	void InitMembers(int price, int num, int money) {
-		APPLE_PRICE = price;
-		numOfApples = num;
-		myMoney = money;
+	SimpleClass(int n1 = 0, int n2 = 0) {
+		num1 = n1;
+		num2 = n2;
 	}
-	int SaleApples(int money) {
-		int num = money / APPLE_PRICE;
-		numOfApples -= num;
-		myMoney += money;
-		return num;
-	}
-	void ShowSalesResult() {
-		cout << "Left Apples: " << numOfApples << endl;
-		cout << "Earned Money: " << myMoney << endl << endl;
+	void ShowData() const {
+		cout << num1 << ' ' << num2 << endl;
 	}
 };
 
-class FruitBuyer {
-private:
-	int myMoney;
-	int numOfApples;
-
-public:
-	void InitMembers(int money) {
-		myMoney = money;
-		numOfApples = 0;
-	}
-	void BuyApples(FruitSeller& seller, int money) {
-		numOfApples += seller.SaleApples(money);
-		myMoney -= money;
-	}
-	void ShowBuyResult() {
-		cout << "Left Money: " << myMoney << endl;
-		cout << "Apples: " << numOfApples << endl << endl;
-	}
-};
-
-int main() {
-	FruitSeller seller;
-	seller.InitMembers(1000, 20, 0);
-	FruitBuyer buyer;
-	buyer.InitMembers(5000);
-	buyer.BuyApples(seller, 2000);
-
-	cout << "Status of Seller" << endl;
-	seller.ShowSalesResult();
-	cout << "Status of Buyer" << endl;
-	buyer.ShowBuyResult();
+int main(void) {
+	SimpleClass sc1();
+	SimpleClass mysc = sc1();
+	mysc.ShowData();
 	return 0;
 }
 
-// p.144
+SimpleClass sc1() {
+	SimpleClass sc(20, 30);
+	return sc;
+}
+
+// p.173
