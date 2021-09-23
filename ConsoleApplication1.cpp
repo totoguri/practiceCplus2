@@ -477,31 +477,91 @@ using namespace std;
 //}
 
 
-class SimpleClass {
+//class SimpleClass {
+//private:
+//	int num1;
+//	int num2;
+//
+//public:
+//	SimpleClass(int n1 = 0, int n2 = 0) {
+//		num1 = n1;
+//		num2 = n2;
+//	}
+//	void ShowData() const {
+//		cout << num1 << ' ' << num2 << endl;
+//	}
+//};
+//
+//int main(void) {
+//	SimpleClass sc1();
+//	SimpleClass mysc = sc1();
+//	mysc.ShowData();
+//	return 0;
+//}
+//
+//SimpleClass sc1() {
+//	SimpleClass sc(20, 30);
+//	return sc;
+//}
+
+// p.173
+
+
+class Point {
 private:
-	int num1;
-	int num2;
+	int x;
+	int y;
 
 public:
-	SimpleClass(int n1 = 0, int n2 = 0) {
-		num1 = n1;
-		num2 = n2;
+	Point(const int& xpos, const int& ypos) {
+		x = xpos;
+		y = ypos;
 	}
-	void ShowData() const {
-		cout << num1 << ' ' << num2 << endl;
+
+	int GetX() const { return x; }
+	int GetY() const { return y; }
+
+	bool SetX(int xpos) {
+		if (0 > xpos || xpos > 100) {
+			cout << "Out of Range" << endl;
+			return false;
+		}
+		x = xpos;
+		return true;
+	}
+	bool SetY(int ypos) {
+		if (0 > ypos || ypos > 100) {
+			cout << "Out of Range" << endl;
+			return false;
+		}
+		y = ypos;
+		return true;
 	}
 };
 
-int main(void) {
-	SimpleClass sc1();
-	SimpleClass mysc = sc1();
-	mysc.ShowData();
+class Rectangle {
+private:
+	Point upLeft;
+	Point lowRight;
+
+public:
+	Rectangle(const int& x1, const int& y1, const int& x2, const int& y2)
+		:upLeft(x1, y1), lowRight(x2, y2) {
+		//
+	}
+
+	void ShowRecInfo() const {
+		cout << "Left Up: " << '[' << upLeft.GetX() << ", ";
+		cout << upLeft.GetY() << ']' << endl;
+		cout << "Right Down: " << '[' << lowRight.GetX() << ", ";
+		cout << lowRight.GetY() << ']' << endl << endl;
+	}
+};
+
+int main() {
+	Rectangle rec(1, 1, 5, 5);
+	rec.ShowRecInfo();
 	return 0;
 }
 
-SimpleClass sc1() {
-	SimpleClass sc(20, 30);
-	return sc;
-}
-
-// p.173
+// p.180
