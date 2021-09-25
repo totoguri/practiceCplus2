@@ -507,61 +507,128 @@ using namespace std;
 // p.173
 
 
-class Point {
+//class Point {
+//private:
+//	int x;
+//	int y;
+//
+//public:
+//	Point(const int& xpos, const int& ypos) {
+//		x = xpos;
+//		y = ypos;
+//	}
+//
+//	int GetX() const { return x; }
+//	int GetY() const { return y; }
+//
+//	bool SetX(int xpos) {
+//		if (0 > xpos || xpos > 100) {
+//			cout << "Out of Range" << endl;
+//			return false;
+//		}
+//		x = xpos;
+//		return true;
+//	}
+//	bool SetY(int ypos) {
+//		if (0 > ypos || ypos > 100) {
+//			cout << "Out of Range" << endl;
+//			return false;
+//		}
+//		y = ypos;
+//		return true;
+//	}
+//};
+//
+//class Rectangle {
+//private:
+//	Point upLeft;
+//	Point lowRight;
+//
+//public:
+//	Rectangle(const int& x1, const int& y1, const int& x2, const int& y2)
+//		:upLeft(x1, y1), lowRight(x2, y2) {
+//		//
+//	}
+//
+//	void ShowRecInfo() const {
+//		cout << "Left Up: " << '[' << upLeft.GetX() << ", ";
+//		cout << upLeft.GetY() << ']' << endl;
+//		cout << "Right Down: " << '[' << lowRight.GetX() << ", ";
+//		cout << lowRight.GetY() << ']' << endl << endl;
+//	}
+//};
+//
+//int main() {
+//	Rectangle rec(1, 1, 5, 5);
+//	rec.ShowRecInfo();
+//	return 0;
+//}
+
+// p.180
+
+
+//class AAA {
+//public:
+//	AAA() {
+//		cout << "empty object" << endl;
+//	}
+//	void ShowYourName() {
+//		cout << "I'm class AAA" << endl;
+//	}
+//};
+//
+//class BBB {
+//private:
+//	AAA& ref;
+//	const int& num;
+//
+//public:
+//	BBB(AAA &r, const int &n)
+//		: ref(r), num(n) {}
+//
+//	void ShowYourName() {
+//		ref.ShowYourName();
+//		cout << "and" << endl;
+//		cout << "I ref num " << num << endl;
+//	}
+//};
+//
+//int main() {
+//	AAA obj1;
+//	BBB obj2(obj1, 20);
+//	obj2.ShowYourName();
+//	return 0;
+//}
+
+
+class AAA {
 private:
-	int x;
-	int y;
+	int num;
 
-public:
-	Point(const int& xpos, const int& ypos) {
-		x = xpos;
-		y = ypos;
+public: 
+	AAA() : num(0) {}
+	AAA& CreateInitObj(int n) const {
+		AAA* ptr = new AAA(n);
+		return *ptr;
 	}
-
-	int GetX() const { return x; }
-	int GetY() const { return y; }
-
-	bool SetX(int xpos) {
-		if (0 > xpos || xpos > 100) {
-			cout << "Out of Range" << endl;
-			return false;
-		}
-		x = xpos;
-		return true;
-	}
-	bool SetY(int ypos) {
-		if (0 > ypos || ypos > 100) {
-			cout << "Out of Range" << endl;
-			return false;
-		}
-		y = ypos;
-		return true;
-	}
-};
-
-class Rectangle {
+	void ShowNum() const { cout << num << endl; }
 private:
-	Point upLeft;
-	Point lowRight;
-
-public:
-	Rectangle(const int& x1, const int& y1, const int& x2, const int& y2)
-		:upLeft(x1, y1), lowRight(x2, y2) {
-		//
-	}
-
-	void ShowRecInfo() const {
-		cout << "Left Up: " << '[' << upLeft.GetX() << ", ";
-		cout << upLeft.GetY() << ']' << endl;
-		cout << "Right Down: " << '[' << lowRight.GetX() << ", ";
-		cout << lowRight.GetY() << ']' << endl << endl;
-	}
+	AAA(int n) : num(n) {}
 };
 
 int main() {
-	Rectangle rec(1, 1, 5, 5);
-	rec.ShowRecInfo();
+	AAA base;
+	base.ShowNum();
+
+	AAA& obj1 = base.CreateInitObj(3);
+	obj1.ShowNum();
+
+	AAA& obj2 = base.CreateInitObj(12);
+	obj2.ShowNum();
+
+	delete& obj1;
+	delete& obj2;
 	return 0;
 }
 
-// p.180
+// p.188
