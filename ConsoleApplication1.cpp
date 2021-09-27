@@ -601,34 +601,224 @@ using namespace std;
 //}
 
 
-class AAA {
+//class AAA {
+//private:
+//	int num;
+//
+//public: 
+//	AAA() : num(0) {}
+//	AAA& CreateInitObj(int n) const {
+//		AAA* ptr = new AAA(n);
+//		return *ptr;
+//	}
+//	void ShowNum() const { cout << num << endl; }
+//private:
+//	AAA(int n) : num(n) {}
+//};
+//
+//int main() {
+//	AAA base;
+//	base.ShowNum();
+//
+//	AAA& obj1 = base.CreateInitObj(3);
+//	obj1.ShowNum();
+//
+//	AAA& obj2 = base.CreateInitObj(12);
+//	obj2.ShowNum();
+//
+//	delete& obj1;
+//	delete& obj2;
+//	return 0;
+//}
+
+// p.188
+
+
+//#include <cstring>
+
+//class Person {
+//private:
+//	char* name;
+//	int age;
+//
+//public:
+//	Person(const char* myname, int myage) {
+//		int len = strlen(myname) + 1;
+//		name = new char[len];
+//		strcpy_s(name, len, myname);
+//		age = myage;
+//	}
+//
+//	void ShowPersonInfo() const {
+//		cout << "Name: " << name << endl;
+//		cout << "Age : " << age << endl;
+//	}
+//
+//	~Person() {
+//		delete[] name;
+//		cout << "called destructor" << endl;
+//	}
+//};
+//
+//int main() {
+//	Person man1("Lee", 29);
+//	Person man2("Jang", 41);
+//	man1.ShowPersonInfo();
+//	man2.ShowPersonInfo();
+//}
+
+
+//#include <cstring>
+//
+//class Person {
+//private:
+//	char* name;
+//	int age;
+//
+//public:
+//	Person(char* myname, int myage) {
+//		int len = strlen(myname) + 1;
+//		name = new char[len];
+//		strcpy_s(name, len, myname);
+//		age = myage;
+//	}
+//
+//	Person() {
+//		name = NULL;
+//		age = 0;
+//		cout << "called Person()" << endl;
+//	}
+//
+//	void SetPersonInfo(char* myname, int myage) {
+//		name = myname;
+//		age = myage;
+//	}
+//
+//	void ShowPersonInfo() const {
+//		cout << "Name: " << name << ", ";
+//		cout << "Age: " << age << endl;
+//	}
+//
+//	~Person() {
+//		delete[]name;
+//		cout << "called destructor!" << endl;
+//	}
+//};
+//
+//int main() {
+//	Person* parr[3];
+//	char namestr[100];
+//	int age;
+//	
+//	for (int i = 0; i < 3; i++) {
+//		cout << "Name: ";
+//		cin >> namestr;
+//		cout << "Age: ";
+//		cin >> age;
+//		parr[i] = new Person(namestr, age);
+//	}
+//
+//	parr[0]->ShowPersonInfo();
+//	parr[1]->ShowPersonInfo();
+//	parr[2]->ShowPersonInfo();
+//	delete parr[0];
+//	delete parr[1];
+//	delete parr[2];
+//
+//	return 0;
+//}
+
+
+//#include <cstring>
+//
+//class SoSimple {
+//private:
+//	int num;
+//
+//public:
+//	SoSimple(int n) : num(n) {
+//		cout << "num = " << num << ", ";
+//		cout << "address = " << this << endl;
+//	}
+//
+//	void ShowSimpleData() {
+//		cout << num << endl;
+//	}
+//
+//	SoSimple* GetThisPointer() {
+//		return this;
+//	}
+//};
+//
+//int main() {
+//	SoSimple sim1(100);
+//	SoSimple* ptr1 = sim1.GetThisPointer();
+//	cout << ptr1 << ", ";
+//	ptr1->ShowSimpleData();
+//
+//	SoSimple sim2(200);
+//	SoSimple* ptr2 = sim2.GetThisPointer();
+//	cout << ptr2 << ", ";
+//	ptr2->ShowSimpleData();
+//
+//	return 0;
+//}
+
+// p.198
+
+
+//class TwoNumber {
+//private:
+//	int num1;
+//	int num2;
+//
+//public:
+//	TwoNumber(int num1, int num2) {
+//		this->num1 = num1;
+//		this->num2 = num2;
+//	}
+//
+//	void ShowTwoNumber() {
+//		cout << this->num1 << endl;
+//		cout << this->num2 << endl;
+//	}
+//};
+//
+//int main() {
+//	TwoNumber two(2, 4);
+//	two.ShowTwoNumber();
+//
+//	return 0;
+//}
+
+
+class SelfRef {
 private:
 	int num;
 
-public: 
-	AAA() : num(0) {}
-	AAA& CreateInitObj(int n) const {
-		AAA* ptr = new AAA(n);
-		return *ptr;
+public:
+	SelfRef(int n) : num(n) {
+		cout << "constructor" << endl;
 	}
-	void ShowNum() const { cout << num << endl; }
-private:
-	AAA(int n) : num(n) {}
+	SelfRef& Adder(int n) {
+		num += n;
+		return *this;
+	}
+	SelfRef& ShowTwoNumber() {
+		cout << num << endl;
+		return *this;
+	}
 };
 
 int main() {
-	AAA base;
-	base.ShowNum();
+	SelfRef obj(3);
+	SelfRef& ref = obj.Adder(2); // ref가 2가 더해진 obj를 참조한다
 
-	AAA& obj1 = base.CreateInitObj(3);
-	obj1.ShowNum();
+	obj.ShowTwoNumber();
+	ref.ShowTwoNumber();
 
-	AAA& obj2 = base.CreateInitObj(12);
-	obj2.ShowNum();
-
-	delete& obj1;
-	delete& obj2;
+	ref.Adder(1).ShowTwoNumber().Adder(2).ShowTwoNumber();
 	return 0;
 }
 
-// p.188
+// p.214
