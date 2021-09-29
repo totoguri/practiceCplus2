@@ -792,33 +792,61 @@ using namespace std;
 //}
 
 
-class SelfRef {
+//class SelfRef {
+//private:
+//	int num;
+//
+//public:
+//	SelfRef(int n) : num(n) {
+//		cout << "constructor" << endl;
+//	}
+//	SelfRef& Adder(int n) {
+//		num += n;
+//		return *this;
+//	}
+//	SelfRef& ShowTwoNumber() {
+//		cout << num << endl;
+//		return *this;
+//	}
+//};
+//
+//int main() {
+//	SelfRef obj(3);
+//	SelfRef& ref = obj.Adder(2); // ref가 2가 더해진 obj를 참조한다
+//
+//	obj.ShowTwoNumber();
+//	ref.ShowTwoNumber();
+//
+//	ref.Adder(1).ShowTwoNumber().Adder(2).ShowTwoNumber();
+//	return 0;
+//}
+
+// p.214
+
+
+class SoSimple {
 private:
-	int num;
+	int num1;
+	int num2;
 
 public:
-	SelfRef(int n) : num(n) {
-		cout << "constructor" << endl;
+	SoSimple(int n1, int n2) :num1(n1), num2(n2) {
+		//
 	}
-	SelfRef& Adder(int n) {
-		num += n;
-		return *this;
+	SoSimple(SoSimple& copy) : num1(copy.num1), num2(copy.num2) {
+		cout << "Called SoSimple(SoSimple &copy)" << endl;
 	}
-	SelfRef& ShowTwoNumber() {
-		cout << num << endl;
-		return *this;
+	void ShowSimpleData() {
+		cout << num1 << endl;
+		cout << num2 << endl;
 	}
 };
 
-int main() {
-	SelfRef obj(3);
-	SelfRef& ref = obj.Adder(2); // ref가 2가 더해진 obj를 참조한다
-
-	obj.ShowTwoNumber();
-	ref.ShowTwoNumber();
-
-	ref.Adder(1).ShowTwoNumber().Adder(2).ShowTwoNumber();
+int main(void) {
+	SoSimple sim1(15, 30);
+	SoSimple sim2 = sim1;
+	sim2.ShowSimpleData();
 	return 0;
 }
 
-// p.214
+// p.221
