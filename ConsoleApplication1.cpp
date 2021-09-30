@@ -824,29 +824,93 @@ using namespace std;
 // p.214
 
 
+//class SoSimple {
+//private:
+//	int num1;
+//	int num2;
+//
+//public:
+//	SoSimple(int n1, int n2) :num1(n1), num2(n2) {
+//		//
+//	}
+//	SoSimple(SoSimple& copy) : num1(copy.num1), num2(copy.num2) {
+//		cout << "Called SoSimple(SoSimple &copy)" << endl;
+//	}
+//	void ShowSimpleData() {
+//		cout << num1 << endl;
+//		cout << num2 << endl;
+//	}
+//};
+//
+//int main(void) {
+//	SoSimple sim1(15, 30);
+//	SoSimple sim2 = sim1;
+//	sim2.ShowSimpleData();
+//	return 0;
+//}
+
+// p.221
+
+
+//#include <cstring>
+//
+//class Person {
+//private:
+//	char* name;
+//	int age;
+//public:
+//	Person(const char* myname, int myage) {
+//		int len = strlen(myname) + 1;
+//		name = new char[len];
+//		strcpy_s(name, len, myname);
+//		age = myage;
+//	}
+//	void ShowPersonInfo() const {
+//		cout << "Name: " << name << endl;
+//		cout << "Age: " << age << endl;
+//	}
+//	~Person() {
+//		delete[]name;
+//		cout << "called destructor" << endl;
+//	}
+//};
+//
+//int main() {
+//	Person man1("Lee", 29);
+//	Person man2 = man1;
+//	man1.ShowPersonInfo();
+//	man2.ShowPersonInfo();
+//	return 0;
+//}
+
+
 class SoSimple {
 private:
-	int num1;
-	int num2;
-
+	int num;
 public:
-	SoSimple(int n1, int n2) :num1(n1), num2(n2) {
-		//
+	SoSimple(int n) : num(n) {}
+	SoSimple(const SoSimple& copy) : num(copy.num) {
+		cout << "Called SoSimple(const SoSimple& copy)" << endl;
 	}
-	SoSimple(SoSimple& copy) : num1(copy.num1), num2(copy.num2) {
-		cout << "Called SoSimple(SoSimple &copy)" << endl;
+	SoSimple& AddNum(int n) {
+		num += n;
+		return *this;
 	}
-	void ShowSimpleData() {
-		cout << num1 << endl;
-		cout << num2 << endl;
+	void ShowData() {
+		cout << "num: " << num << endl;
 	}
 };
 
-int main(void) {
-	SoSimple sim1(15, 30);
-	SoSimple sim2 = sim1;
-	sim2.ShowSimpleData();
+SoSimple SimpleFuncObj(SoSimple ob) {
+	cout << "return ÀÌÀü" << endl;
+	return ob;
+}
+
+int main() {
+	SoSimple obj(7);
+	SimpleFuncObj(obj).AddNum(30).ShowData();
+	obj.ShowData();
 	return 0;
 }
 
-// p.221
+// p.326
